@@ -7,7 +7,7 @@ import           Data.Proxy (Proxy)
 
 data Field = Field
   { fieldName :: String
-  , fieldType :: Schema
+  , fieldType :: Type
   }
   deriving (Eq, Show, Read)
 
@@ -19,15 +19,22 @@ data Schema
   deriving (Eq, Show, Read)
 
 
+data Type = Type
+  { typeName   :: String
+  , typeSchema :: Schema
+  }
+  deriving (Eq, Show, Read)
+
+
 class HasSchema a where
-  schema :: Proxy a -> Schema
+  schema :: Proxy a -> Type
 
 
 instance HasSchema Int where
-  schema _ = SchemaInt
+  schema _ = Type "Int" SchemaInt
 
 instance HasSchema Double where
-  schema _ = SchemaDouble
+  schema _ = Type "Double" SchemaDouble
 
 instance HasSchema String where
-  schema _ = SchemaString
+  schema _ = Type "String" SchemaString
