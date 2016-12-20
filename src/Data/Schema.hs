@@ -30,6 +30,10 @@ class HasSchema a where
   schema :: Proxy a -> Type
 
 
+instance HasSchema Schema where
+  schema = error "TODO(robinlinden): define schema for Schema"
+
+
 instance HasSchema Int where
   schema _ = Type "Int" SchemaInt
 
