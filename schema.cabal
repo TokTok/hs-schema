@@ -42,5 +42,7 @@ test-suite testsuite
   build-depends:
       base < 5
     , QuickCheck
+    , data-msgpack
+    , groom
     , hspec
     , schema
