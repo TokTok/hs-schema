@@ -11,8 +11,15 @@ data Field = Field
   }
   deriving (Eq, Show, Read)
 
+data Option = Option
+  { optionName  :: String
+  , optionValue :: Int
+  }
+  deriving (Eq, Show, Read)
+
 data Schema
   = SchemaRecord [Field]
+  | SchemaEnum [Option]
   | SchemaInt
   | SchemaDouble
   | SchemaString
