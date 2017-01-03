@@ -2,7 +2,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Data.SchemaSpec (spec) where
 
-import           Control.Applicative ((<$>))
+import           Control.Applicative ((<$>), (<*>))
 import           Data.Proxy          (Proxy (..))
 import           Debug.Trace         (trace)
 import           GHC.Generics        (Generic)
