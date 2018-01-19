@@ -1,0 +1,8 @@
+load("@io_tweag_rules_haskell//haskell:haskell.bzl", "haskell_library")
+
+haskell_library(
+    name = "hs-schema",
+    srcs = glob(["src/**/*.*hs"]),
+    prebuilt_dependencies = ["base"],
+    src_strip_prefix = "src",
+)
