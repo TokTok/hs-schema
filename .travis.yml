@@ -3,25 +3,23 @@ ghc: 7.8
 
 cache:
   directories:
-    - $HOME/.cabal
-    - $HOME/.ghc
+  - $HOME/.cabal
+  - $HOME/.ghc
 
 install:
-  - cabal update
-  - cabal install happy
-  - cabal install hpc-coveralls "aeson < 0.11"
-  - cabal install --only-dependencies --enable-tests --enable-benchmarks
+- export PATH=$HOME/.cabal/bin:$PATH
+- cabal update
+- cabal install happy
+- cabal install hpc-coveralls "aeson < 0.11"
+- cabal install --only-dependencies --enable-tests --enable-benchmarks
 
 script:
-  - cabal configure --enable-tests --enable-benchmarks --enable-library-coverage
-  - cabal build
-  - cabal test
+- cabal configure --enable-tests --enable-benchmarks --enable-library-coverage
+- cabal build
+- cabal test
 
 after_script:
-  - TESTSUITE=schema-0.0.1
-  - cp dist/hpc/mix/testsuite/*.mix dist/hpc/mix/$TESTSUITE/
-  - hpc-coveralls $TESTSUITE
-
-branches:
-  only:
-  - master
+- TESTSUITE=schema-0.0.1
+- find dist/hpc
+- cp dist/hpc/mix/testsuite/*.mix dist/hpc/mix/$TESTSUITE/
+- hpc-coveralls $TESTSUITE
