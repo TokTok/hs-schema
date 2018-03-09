@@ -6,6 +6,11 @@ project("hs-schema")
 haskell_library(
     name = "hs-schema",
     srcs = glob(["src/**/*.*hs"]),
+    compiler_flags = [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-imports",
+    ],
     prebuilt_dependencies = ["base"],
     src_strip_prefix = "src",
 )
