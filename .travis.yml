@@ -1,25 +1,16 @@
-language: haskell
-ghc: 7.8
+language: generic
 
 cache:
   directories:
-  - $HOME/.cabal
-  - $HOME/.ghc
+  - $HOME/.stack
 
-install:
-- export PATH=$HOME/.cabal/bin:$PATH
-- cabal update
-- cabal install happy
-- cabal install hpc-coveralls "aeson < 0.11"
-- cabal install --only-dependencies --enable-tests --enable-benchmarks
+before_install:
+- export PATH=$HOME/.local/bin:$PATH
+- travis_retry curl -L https://github.com/TokTok/hs-tools/releases/download/v0.1/hs-tools-v0.1.tar.gz | tar xz -C $HOME
 
 script:
-- cabal configure --enable-tests --enable-benchmarks --enable-library-coverage
-- cabal build
-- cabal test
-
-after_script:
-- TESTSUITE=schema-0.0.1
-- find dist/hpc
-- cp dist/hpc/mix/testsuite/*.mix dist/hpc/mix/$TESTSUITE/
-- hpc-coveralls $TESTSUITE
+- hlint .
+- stylish-haskell-lhs -i .
+- git diff --exit-code
+- stack --no-terminal test --coverage
+- shc schema testsuite
