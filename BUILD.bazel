@@ -11,6 +11,7 @@ haskell_library(
         "-Werror",
         "-Wno-unused-imports",
     ],
-    prebuilt_dependencies = ["base"],
     src_strip_prefix = "src",
+    version = "0.0.1",
+    deps = ["//third_party/haskell:base"],
 )
