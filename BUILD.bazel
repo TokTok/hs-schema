@@ -1,3 +1,4 @@
+load("@ai_formation_hazel//:hazel.bzl", "hazel_library")
 load("@io_tweag_rules_haskell//haskell:haskell.bzl", "haskell_library")
 load("//tools/project:build_defs.bzl", "project")
 
@@ -13,5 +14,5 @@ haskell_library(
     ],
     src_strip_prefix = "src",
     version = "0.0.1",
-    deps = ["//third_party/haskell:base"],
+    deps = [hazel_library("base")],
 )
