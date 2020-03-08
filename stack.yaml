@@ -1,6 +1,3 @@
 ---
 packages: [.]
-resolver: lts-6.27
-extra-deps:
-  - data-msgpack-0.0.12
-  - data-msgpack-types-0.0.2
+resolver: lts-14.27
