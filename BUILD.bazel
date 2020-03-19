@@ -1,5 +1,6 @@
 load("@ai_formation_hazel//tools:mangling.bzl", "hazel_library")
 load("@rules_haskell//haskell:defs.bzl", "haskell_library")
+load("//third_party/haskell/hspec-discover:build_defs.bzl", "hspec_test")
 load("//tools/project:build_defs.bzl", "project")
 
 project()
@@ -15,4 +16,21 @@ haskell_library(
     src_strip_prefix = "src",
     version = "0.0.1",
     deps = [hazel_library("base")],
+)
+
+hspec_test(
+    name = "test",
+    compiler_flags = [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-imports",
+    ],
+    deps = [
+        ":hs-schema",
+        "//hs-msgpack",
+        hazel_library("QuickCheck"),
+        hazel_library("base"),
+        hazel_library("groom"),
+        hazel_library("hspec"),
+    ],
 )
