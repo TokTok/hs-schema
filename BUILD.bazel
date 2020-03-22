@@ -8,11 +8,6 @@ project()
 haskell_library(
     name = "hs-schema",
     srcs = glob(["src/**/*.*hs"]),
-    compiler_flags = [
-        "-Wall",
-        "-Werror",
-        "-Wno-unused-imports",
-    ],
     src_strip_prefix = "src",
     version = "0.0.1",
     deps = [hazel_library("base")],
@@ -20,11 +15,6 @@ haskell_library(
 
 hspec_test(
     name = "test",
-    compiler_flags = [
-        "-Wall",
-        "-Werror",
-        "-Wno-unused-imports",
-    ],
     deps = [
         ":hs-schema",
         "//hs-msgpack",
