@@ -11,10 +11,14 @@ env:
     - secure: "gNfKCo/wSuCTaME2TEJt7QZHRPhHeUy3uOpngg4CRleULeWL0H8UsVhdSa88fw5Qhh/ft3CI8uJ/rCgCsdtuQMOXyeoTBaFrDReuGLbEdvT79GugABc7Tdq90/r6KsWXB8VdVeT6oad37eff7LH8aRvJoB9YwZwlA8MhPsIuzMteotkZaG76kwk/vi4T2lUaPuK2ZIKxZAX3flVXJMD4ZnAukTk20lyAwTWMubSO+ET5iD9w2DZPGzFQYp6nLjVnFVnTe4wEUP4UA87zHiO4p+IfHPd7E3GVmPSoDhlsMHt7xIK51JMZg7sOGMNfR2tFJHPkGBpGLApbWExAgU7wMx3ttau8gx5tFBGtyrjjoZkEsHiipRdP/53K/KZhzcALaE6c5wdYzAWohkKjnWx8DGWaI8Yd6XoQgF6wuYZ2hevrbK0jhY5yggc6H122QR8ZIArRql2HT7F+anW64LnpgVdI9J5OGrx+hS+7XzluOLyeqMiIBEFXgDzLYV8BsIHIHDdp6ONpYhnNiq4HU43PBKbd5nfaFB9rbs6A4ipapRrwZLxE3z7SCl1yuX43oWMpVNTv0cjRfZWUDCBAqnLZhr1EWEPIyFQdAdb3UHhObtk5q5Ed1690c0FL1PFxdN3YQWyRPt/ZxQn4RsptczhnpZ+Wot9M0YnbCJO8KUPsIOE="
 
 cache:
+  timeout: 600
   directories:
+    - $HOME/.local
     - $HOME/.stack
 
-script: eval $(bash <(curl -s https://raw.githubusercontent.com/TokTok/hs-tools/master/bin/travis-haskell-script))
+script:
+  - bash <(travis_retry curl -s https://raw.githubusercontent.com/TokTok/hs-tools/master/bin/travis-haskell) script
+  - eval $(travis-haskell env)
 
 deploy:
   provider: releases
@@ -26,7 +30,7 @@ deploy:
     repo: TokTok/hs-schema
     tags: true
 
-after_deploy: bash <(curl -s https://raw.githubusercontent.com/TokTok/hs-tools/master/bin/travis-haskell-deploy)
+after_deploy: travis-haskell deploy
 
 # Only build pull requests and releases, don't build master on pushes,
 # except through api or cron.

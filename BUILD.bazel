@@ -3,18 +3,13 @@ load("@rules_haskell//haskell:defs.bzl", "haskell_library")
 load("//third_party/haskell/hspec-discover:build_defs.bzl", "hspec_test")
 load("//tools/project:build_defs.bzl", "project")
 
-VERSION = "0.0.2"
-
-project(
-    standard_travis = True,
-    version = VERSION,
-)
+project(standard_travis = True)
 
 haskell_library(
     name = "hs-schema",
     srcs = glob(["src/**/*.*hs"]),
     src_strip_prefix = "src",
-    version = VERSION,
+    version = "0.0.2",
     deps = [hazel_library("base")],
 )
 
