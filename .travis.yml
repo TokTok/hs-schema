@@ -14,32 +14,19 @@ cache:
   directories:
     - $HOME/.stack
 
-before_install:
-  - export PATH=$HOME/.local/bin:$PATH
-  - travis_retry curl -L https://github.com/TokTok/hs-tools/releases/download/v0.6/hs-tools-v0.6.tar.gz | tar xz -C $HOME
-
-script:
-  - hlint .
-  - stylish-haskell-lhs -i .
-  - git diff --exit-code
-  - stack --no-terminal test --coverage
-  - shc schema testsuite
-  - stack sdist --tar-dir .
+script: eval $(bash <(curl -s https://raw.githubusercontent.com/TokTok/hs-tools/master/bin/travis-haskell-script))
 
 deploy:
   provider: releases
   token:
     secure: "BEqmb7pH28obcC6ECRIfo+ljbRVipdwncGRJTphlOHpQNFH6JHnrtVVINHGy6ikxRYXnI7wGNzl1mbzO2sADutoLJJG5fL9p2dD/7QXSiXDTDA/smUJH9RWCjED6/8oGF65vrOpzL6AieBmhH9oujVvVkBODJpJf7y7rJgLRsTLpV5edNP01gxx6CYaJWSPDp8dv8Azc10MTAqG6R1w6dAvD1oNpVjeAXb7gnCkjv97Nw7PJlL/VvZ581fX3mowd5BbO1v01xlhtuxNJ4Q47DmpCE55N1nPhU+7s2Ez1mk9qCfkGcQwpSlug7f9WboRCL+R+EYtFFaVzeg6zmOIVn9+5GNQDcj5DE7r+1AatT/+7REb+NWxoq8CyyvD+i+jiEK04v5wUA/vaKaFua6JC5gk5tCNVqJjIuBlgehMFvLACQ/NWn3OkC9Tsvgq11lZaJuP6Q/waHsR1iL2uME4LXXKUQiyczgTdIvxa90wCtjcxxVH8OctpKLF/yNTtVJm4GHE8z9MR0+HHwyIFaZQ5o1kFXbx5HxtPWnX8YZVEwDJM/XVr9TxcMkFzh0iaPJG2V7WESdlHKphE0HLmlMJkHq6qA6Qddu9QhdWEvRpyEZ5o8EWD0k48WHGVIyNKWME0okw1U9Hj9a/wIFmNdwP03I+euRzP33iAfjECO+AgHvs="
-  file: schema-0.0.2.tar.gz
+  file: $PACKAGE-$VERSION.tar.gz
   skip_cleanup: true
   on:
     repo: TokTok/hs-schema
     tags: true
 
-after_deploy:
-  - mkdir -p "$HOME/.stack/upload"
-  - echo "{\"username\":\"$HACKAGE_USERNAME\",\"password\":\"$HACKAGE_PASSWORD\"}" > $HOME/.stack/upload/credentials.json
-  - stack --no-terminal upload .
+after_deploy: bash <(curl -s https://raw.githubusercontent.com/TokTok/hs-tools/master/bin/travis-haskell-deploy)
 
 # Only build pull requests and releases, don't build master on pushes,
 # except through api or cron.
