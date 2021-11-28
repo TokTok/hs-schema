@@ -2,16 +2,15 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Data.SchemaSpec (spec) where
 
-import           Control.Applicative ((<$>), (<*>))
-import           Control.Monad       (when)
-import           Data.Proxy          (Proxy (..))
-import           Debug.Trace         (trace)
-import           GHC.Generics        (Generic)
+import           Control.Monad    (when)
+import           Data.Proxy       (Proxy (..))
+import           Debug.Trace      (trace)
+import           GHC.Generics     (Generic)
 import           Test.Hspec
 import           Test.QuickCheck
-import           Text.Groom          (groom)
+import           Text.Groom       (groom)
 
-import           Data.MessagePack    (MessagePack (..), Object (..))
+import           Data.MessagePack (MessagePack (..), Object (..))
 import           Data.Schema
 
 --------------------------------------------------------------------------------
