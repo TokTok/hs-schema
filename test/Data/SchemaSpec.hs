@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveGeneric       #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE StrictData          #-}
 module Data.SchemaSpec (spec) where
 
 import           Control.Monad    (when)

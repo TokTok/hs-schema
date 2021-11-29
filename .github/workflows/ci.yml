@@ -40,6 +40,7 @@ jobs:
         run: cabal haddock --haddock-for-hackage --enable-doc
 
       - name: Publish candidate to Hackage
+        if: ${{ github.event_name == 'push' }}
         env:
           API_TOKEN_HACKAGE: ${{ secrets.API_TOKEN_HACKAGE }}
         run: |

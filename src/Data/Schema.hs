@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE StrictData        #-}
 module Data.Schema where
 
 import           Data.Proxy (Proxy)
