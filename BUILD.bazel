@@ -11,6 +11,7 @@ haskell_library(
     src_strip_prefix = "src",
     version = "0.0.3",
     deps = [hazel_library("base")],
+    visibility = ["//visibility:public"],
 )
 
 hspec_test(
