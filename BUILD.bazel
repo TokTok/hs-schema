@@ -10,8 +10,8 @@ haskell_library(
     srcs = glob(["src/**/*.*hs"]),
     src_strip_prefix = "src",
     version = "0.0.3",
-    deps = [hazel_library("base")],
     visibility = ["//visibility:public"],
+    deps = [hazel_library("base")],
 )
 
 hspec_test(
