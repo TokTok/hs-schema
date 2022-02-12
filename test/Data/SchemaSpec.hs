@@ -11,7 +11,7 @@ import           Test.Hspec
 import           Test.QuickCheck
 import           Text.Groom       (groom)
 
-import           Data.MessagePack (MessagePack (..), Object (..))
+import           Data.MessagePack (MessagePack (..), Object (..), defaultConfig)
 import           Data.Schema
 
 --------------------------------------------------------------------------------
@@ -93,12 +93,12 @@ spec =
       property $ \(v1 :: MyRecordV1) ->
         let
           -- Forward:
-          obj1 = toObject v1
+          obj1 = toObject defaultConfig v1
           scm1 = schema (Proxy :: Proxy MyRecordV1)
           v2 :: MyRecordV2
           v2 = fromObjectWithSchema scm1 scm2 obj1
           -- And back:
-          obj2 = toObject v2
+          obj2 = toObject defaultConfig v2
           scm2 = schema (Proxy :: Proxy MyRecordV2)
           v1' :: MyRecordV1
           v1' = fromObjectWithSchema scm2 scm1 obj2
