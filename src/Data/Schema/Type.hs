@@ -36,14 +36,16 @@ type DatatypeName = (String, String)
 data SchemaF a
     = Empty
     | Atom Type
+    | List a
 
-    | Prod (Maybe DatatypeName) [a]
+    | Prod [a]
     | Field String a
 
     | Sum (Maybe DatatypeName) [a]
     | Con String a
 
     | Module String [a]
+    | Schema [a]
     deriving (Show, Read, Eq, Generic, Generic1, Functor, Foldable, Traversable)
     deriving (Show1, Read1, Eq1) via FunctorClassesDefault SchemaF
 
@@ -59,7 +61,7 @@ sumType a (Fix (Sum db b))                = Fix $ Sum db (a : b)
 sumType a b                               = Fix $ Sum Nothing [a, b]
 
 prodType :: Schema -> Schema -> Schema
-prodType (Fix (Prod da a)) (Fix (Prod db b)) = Fix $ Prod (da <|> db) (a ++ b)
-prodType (Fix (Prod da a)) b                 = Fix $ Prod da (a ++ [b])
-prodType a (Fix (Prod db b))                 = Fix $ Prod db (a : b)
-prodType a b                                 = Fix $ Prod Nothing [a, b]
+prodType (Fix (Prod a)) (Fix (Prod b)) = Fix $ Prod (a ++ b)
+prodType (Fix (Prod a)) b              = Fix $ Prod (a ++ [b])
+prodType a (Fix (Prod b))              = Fix $ Prod (a : b)
+prodType a b                           = Fix $ Prod [a, b]

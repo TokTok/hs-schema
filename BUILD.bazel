@@ -26,9 +26,9 @@ hspec_test(
     size = "small",
     deps = [
         ":hs-schema",
-        "//hs-msgpack-binary",
         hazel_library("QuickCheck"),
         hazel_library("base"),
+        hazel_library("bytestring"),
         hazel_library("groom"),
         hazel_library("hspec"),
     ],
