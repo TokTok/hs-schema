@@ -83,7 +83,7 @@ instance (Selector s, GToSchema f) => GToSchema (S1 s f) where
     gToSchema = M1 <$> addSelName (selName (undefined :: S1 s f a)) gToSchema
       where
         addSelName :: String -> Builder a -> Builder a
-        addSelName "" b = b
+        addSelName "" b               = b
         addSelName name (Builder x s) = Builder x . Fix . Field name $ s
 
 instance GToSchema a => GToSchema (M1 t c a) where
