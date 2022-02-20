@@ -44,16 +44,15 @@ test-suite testsuite
   hs-source-dirs: test
   main-is: testsuite.hs
   other-modules:
-      Data.SchemaSpec
+      Data.Schema.PrettySpec
   ghc-options:
       -Wall
-      -fno-warn-unused-imports
   build-tool-depends:
       hspec-discover:hspec-discover
   build-depends:
       base < 5
     , QuickCheck
-    , msgpack-binary
+    , bytestring
     , groom
     , hspec
     , schema

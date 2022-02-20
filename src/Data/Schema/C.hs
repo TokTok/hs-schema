@@ -14,8 +14,7 @@ genC :: Schema -> Doc
 genC (Fix (Sum (Just (mName, dName)) cons)) =
     vsep
     . punctuate line
-    . map (uncurry genDatatype)
-    . map (flattenFields ns prefix)
+    . map (uncurry genDatatype . flattenFields ns prefix)
     $ cons
   where
     ns = namespaceFor (List.splitOn "." mName)
@@ -40,18 +39,19 @@ data StructName = StructName
     deriving (Show)
 
 flattenFields :: String -> String -> Schema -> (StructName, [StructField])
-flattenFields ns prefix = (conName . unFix &&& foldFix go)
+flattenFields ns prefix = conName . unFix &&& foldFix go
   where
-    go (Atom ty)               = [StructField empty ty]
-    go (Prod (Just (_, ty)) _) = [StructField empty $ tyName ns ty]
-    go (Sum (Just (_, ty)) _)  = [StructField empty $ tyName ns ty]
+    go (Atom ty)              = [StructField empty ty]
+    go (Sum (Just (_, ty)) _) = [StructField empty $ tyName ns ty]
 
-    go (Field name tys)        = map (\ty -> ty{sfField = fieldName name}) tys
-    go (Con _ tys)             = tys
-    go (Prod Nothing fields)   = concat fields
-    go (Sum Nothing _)         = []
-    go Empty                   = []
-    go Module{}                = []
+    go (Field name tys)       = map (\ty -> ty{sfField = fieldName name}) tys
+    go (Con _ tys)            = tys
+    go (Prod fields)          = concat fields
+    go (Sum Nothing _)        = []
+    go Empty                  = []
+    go Module{}               = []
+    go Schema{}               = []
+    go List{}                 = []
 
     conName (Con name _) = StructName
         { snType = text $ toCName name
@@ -100,7 +100,7 @@ genStruct (StructName sName _) fields =
     go (StructField f TyWord64)   = text "uint64_t" <+> f
     go (StructField f (TyName s)) = text s <+> f
     go (StructField f (TyFixedBin s)) =
-        text "uint8_t" <+> f <> (brackets $ int s)
+        text "uint8_t" <+> f <> brackets (int s)
     go (StructField f TyBin) =
         text "uint8_t *" <> f <> semi </>
         text "uint32_t " <> f <> text "_size"

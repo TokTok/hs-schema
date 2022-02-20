@@ -6,15 +6,19 @@ import           Prelude                      hiding ((<$>))
 import           Text.PrettyPrint.ANSI.Leijen
 
 ppSchema :: Schema -> Doc
-ppSchema = foldFix go
+ppSchema = (<> line) . foldFix go
 
 go :: SchemaF Doc -> Doc
-go (Atom ty)                    = text $ show ty
-go (Field name ty)              = text name <+> text "::" <+> ty
-go (Con name ty)                = text name <+> char '(' <> ty <> char ')'
-go (Prod Nothing fields)        = char '{' <$> indent 2 (vcat fields) <$> char '}'
-go (Prod (Just (m, ty)) fields) = text m <> char '.' <> text ty <+> text "= {" <$> indent 2 (vcat fields) <$> char '}'
-go (Sum Nothing cons)           = vcat cons
-go (Sum (Just (m, ty)) cons)    = text m <> char '.' <> text ty <$> indent 2 (vcat cons)
-go (Module name ss)             = text "module" <+> text name <$> vcat ss
-go Empty                        = text "<empty>"
+go (Atom ty)                 = text $ show ty
+go (Field name ty)           = text name <+> text "::" <+> ty
+go (List ty)                 = brackets ty
+go (Con name ty)             = text name <+> equals <+> ty
+go (Prod fields)             = braces (line <> indent 2 (vcat fields) <> line)
+go (Sum Nothing cons)        = vcat cons
+go (Sum (Just (m, ty)) cons) =
+    text ("type " <> m <> "." <> ty) <+> braces (
+        line <> indent 2 (vcat cons)
+        <> line)
+go (Module name ss)          = text "module" <+> text name <$> vcat ss
+go (Schema mods)             = text "schema" <$> vcat mods
+go Empty                     = text "<empty>"
