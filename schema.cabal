@@ -28,6 +28,11 @@ library
       Data.Schema
   build-depends:
       base < 5
+    , ansi-wl-pprint
+    , casing
+    , data-fix
+    , split
+    , transformers-compat
 
 test-suite testsuite
   type: exitcode-stdio-1.0
