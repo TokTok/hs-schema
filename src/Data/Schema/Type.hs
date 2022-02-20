@@ -53,7 +53,7 @@ instance Semigroup Schema where
     a               <> Fix (Prod db b) = Fix $ Prod db (a : b)
     Fix (Prod da a) <> b               = Fix $ Prod da (a ++ [b])
 
-    a <> b = Fix $ Sum Nothing [a, b]
+    a <> b                             = Fix $ Sum Nothing [a, b]
 
 sumType :: Schema -> Schema -> Schema
 sumType (Fix (Sum da a)) (Fix (Sum db b)) = Fix $ Sum (da <|> db) (a ++ b)

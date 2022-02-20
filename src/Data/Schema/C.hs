@@ -22,9 +22,9 @@ genC (Fix (Sum (Just (mName, dName)) cons)) =
 genC s = error $ show s
 
 namespaceFor :: [String] -> String
-namespaceFor [] = ""
+namespaceFor []               = ""
 namespaceFor [ns, "Types", _] = ns <> "_"
-namespaceFor (_:parts) = namespaceFor parts
+namespaceFor (_:parts)        = namespaceFor parts
 
 data StructField = StructField
     { sfField :: Doc
