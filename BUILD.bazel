@@ -11,7 +11,14 @@ haskell_library(
     src_strip_prefix = "src",
     version = "0.0.3",
     visibility = ["//visibility:public"],
-    deps = [hazel_library("base")],
+    deps = [
+        hazel_library("ansi-wl-pprint"),
+        hazel_library("base"),
+        hazel_library("casing"),
+        hazel_library("data-fix"),
+        hazel_library("split"),
+        hazel_library("transformers-compat"),
+    ],
 )
 
 hspec_test(
