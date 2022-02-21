@@ -28,6 +28,7 @@ library
       Data.Schema
       Data.Schema.Builder
       Data.Schema.C
+      Data.Schema.Deinline
       Data.Schema.Pretty
       Data.Schema.Type
   build-depends:
