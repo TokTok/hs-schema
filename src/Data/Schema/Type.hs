@@ -5,6 +5,7 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DerivingVia        #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE StrictData         #-}
 module Data.Schema.Type
     ( SchemaF (..)
     , Schema
