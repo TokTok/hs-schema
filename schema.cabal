@@ -1,5 +1,5 @@
 name:                 schema
-version:              0.0.3
+version:              0.0.4
 synopsis:             Encoding-independent schemas for Haskell data types.
 homepage:             https://toktok.github.io/
 license:              GPL-3

@@ -9,7 +9,7 @@ haskell_library(
     name = "hs-schema",
     srcs = glob(["src/**/*.*hs"]),
     src_strip_prefix = "src",
-    version = "0.0.3",
+    version = "0.0.4",
     visibility = ["//visibility:public"],
     deps = [
         hazel_library("ansi-wl-pprint"),
