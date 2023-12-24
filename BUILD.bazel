@@ -8,6 +8,7 @@ haskell_library(
     name = "hs-schema",
     srcs = glob(["src/**/*.*hs"]),
     src_strip_prefix = "src",
+    tags = ["no-cross"],
     version = "0.0.4",
     visibility = ["//visibility:public"],
     deps = [
