@@ -1,0 +1,19 @@
+load("@rules_haskell//haskell:defs.bzl", "haskell_binary")
+
+haskell_binary(
+    name = "restgen",
+    srcs = ["restgen.hs"],
+    tags = ["no-cross"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//hs-schema",
+        "//third_party/haskell:aeson",
+        "//third_party/haskell:base",
+        "//third_party/haskell:casing",
+        "//third_party/haskell:groom",
+        "//third_party/haskell:text",
+        "//third_party/haskell:unordered-containers",
+        "//third_party/haskell:vector",
+        "//third_party/haskell:yaml",
+    ],
+)

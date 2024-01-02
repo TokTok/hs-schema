@@ -12,12 +12,17 @@ haskell_library(
     version = "0.0.4",
     visibility = ["//visibility:public"],
     deps = [
+        "//third_party/haskell:aeson",
         "//third_party/haskell:ansi-wl-pprint",
         "//third_party/haskell:base",
         "//third_party/haskell:casing",
         "//third_party/haskell:data-fix",
+        "//third_party/haskell:scientific",
         "//third_party/haskell:split",
+        "//third_party/haskell:text",
         "//third_party/haskell:transformers-compat",
+        "//third_party/haskell:unordered-containers",
+        "//third_party/haskell:vector",
     ],
 )
 
