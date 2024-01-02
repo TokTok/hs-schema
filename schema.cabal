@@ -30,12 +30,17 @@ library
     Data.Schema.Type
 
   build-depends:
-      base                 <5
+      aeson
+    , base                 <5
     , casing
     , data-fix
     , prettyprinter
+    , scientific
     , split
+    , text
     , transformers-compat
+    , unordered-containers
+    , vector
 
 test-suite testsuite
   type:               exitcode-stdio-1.0
