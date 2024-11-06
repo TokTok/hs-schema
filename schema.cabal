@@ -30,10 +30,10 @@ library
     Data.Schema.Type
 
   build-depends:
-      ansi-wl-pprint
-    , base                 <5
+      base                 <5
     , casing
     , data-fix
+    , prettyprinter
     , split
     , transformers-compat
 
