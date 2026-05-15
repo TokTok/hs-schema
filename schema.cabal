@@ -26,8 +26,11 @@ library
     Data.Schema.Builder
     Data.Schema.C
     Data.Schema.Deinline
+    Data.Schema.OpenAPI.Haskell
+    Data.Schema.OpenAPI.Types
     Data.Schema.Pretty
     Data.Schema.Type
+    Data.Text.Casing
 
   build-depends:
       aeson
@@ -47,7 +50,9 @@ test-suite testsuite
   default-language:   Haskell2010
   hs-source-dirs:     test
   main-is:            testsuite.hs
-  other-modules:      Data.Schema.PrettySpec
+  other-modules:
+    Data.Schema.CSpec
+    Data.Schema.PrettySpec
   ghc-options:        -Wall
   build-tool-depends: hspec-discover:hspec-discover
   build-depends:
